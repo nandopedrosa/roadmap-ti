@@ -24,9 +24,10 @@ app.use(express.static('./public'));
 app.use(express.json());
 
 //Views
-const viewsDisciplina = require('./disciplina/views');
+const viewsDisciplina = require('./disciplina/views.js');
 app.use('/disciplina', viewsDisciplina);
-
+const viewsAssunto = require('./assunto/views.js');
+app.use('/assunto', viewsAssunto);
 
 const port = process.env.PORT || 5000;
 

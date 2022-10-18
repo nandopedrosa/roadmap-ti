@@ -11,11 +11,10 @@ class AppDAO {
         this.db = new sqlite3.Database('data.db', (err) => {
             if (err) {
                 console.log('Could not connect to database', err)
-            } else {
-                console.log('Connected to database')
             }
-        })
+        });
     }
+
 
     run(sql, params = []) {
         return new Promise((resolve, reject) => {
