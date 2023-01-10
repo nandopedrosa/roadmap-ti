@@ -1,0 +1,35 @@
+/* OrderListDemo.css */
+
+.orderlist-assuntos .assunto-item {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    width: 100%;
+}
+
+.orderlist-assuntos .assunto-item .assunto-list-detail {
+    flex: 1 1 0;
+}
+
+.orderlist-assuntos .assunto-item .assunto-list-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+
+.orderlist-assuntos .assunto-item .assunto-descricao {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+@media screen and (max-width: 576px) {
+    .orderlist-assuntos .assunto-item {
+        flex-wrap: wrap;
+    }
+
+}
+
+.p-orderlist-controls {
+    padding-left: 0 !important;
+}

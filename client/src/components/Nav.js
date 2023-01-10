@@ -17,10 +17,7 @@ function Nav() {
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link" to="/disciplinas">Disciplinas</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/assuntos">Assuntos</Link>
+                            <Link className="nav-link" to="/disciplinas">Disciplinas e Assuntos</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/">Sair</Link>

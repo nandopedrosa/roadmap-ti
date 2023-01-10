@@ -15,7 +15,14 @@ router.route('/update').post((req, res) => {
     });
 });
 
-router.route('/list').get((req, res) => {
+router.route('/reorder').post((req, res) => {
+    service.reorder(req).then((v) => {
+        res.send(v);
+    });
+});
+
+
+router.route('/list/:idDisciplina').get((req, res) => {
     service.getAll(req).then((result) => {
         res.send(result);
     });

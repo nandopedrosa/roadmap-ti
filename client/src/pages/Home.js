@@ -8,8 +8,7 @@ function Home() {
                 <p className="lead">Gerenciador de roteiro de estudos para Concursos de TI</p>
                 <hr className="my-4" />
                 <p><i>implementar login...</i></p>
-                <Link className="btn btn-success btn-lg mb-3 me-3" to="/disciplinas" role="button">Disciplinas</Link>
-                <Link className="btn btn-primary btn-lg mb-3" to="/assuntos" role="button">Assuntos</Link>
+                <Link className="btn btn-success btn-lg mb-3 me-3" to="/disciplinas" role="button">Gerenciar Disciplinas e Assuntos</Link>
             </div>
         </div>
     );

@@ -3,13 +3,14 @@ import { Toast } from 'primereact/toast';
 import { Link } from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column'
-import axios from 'axios';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import axios from 'axios';
 import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 import { showSuccess } from '../../util/Globals';
+import { stripHtml } from "string-strip-html";
 
 function Disciplinas() {
     const [disciplinas, setDisciplinas] = useState([]);
@@ -44,6 +45,7 @@ function Disciplinas() {
             rejectLabel: "Não",
         });
     }
+
     const actionsColumnTemplate = (rowData) => {
         return <>
             <button type="button" title="Deletar" onClick={() => { confirm(rowData.id) }} className="btn btn-sm btn-danger me-2 mt-1"><i className="bi bi-trash"></i></button>
@@ -52,6 +54,11 @@ function Disciplinas() {
         </>;
     }
 
+    const descricaoColumnTemplate = (rowData) => {
+        return <>
+            {stripHtml(rowData.descricao).result}
+        </>;
+    }
     return (
         <>
             <Toast ref={toast} />
@@ -72,7 +79,7 @@ function Disciplinas() {
                         <div className="col-sm-12">
                             <DataTable value={disciplinas}>
                                 <Column field="nome" header="Nome"></Column>
-                                <Column field="descricao" header="Descrição"></Column>
+                                <Column body={descricaoColumnTemplate} header="Descrição"></Column>
                                 <Column header="Ações" body={actionsColumnTemplate}></Column>
                             </DataTable>
                         </div>

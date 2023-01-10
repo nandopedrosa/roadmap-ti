@@ -17,44 +17,53 @@ async function create(req) {
     v = validate([idDisciplina, nome, descricao]);
 
     if (v.status == Validation.STATUS_OK) {
-        const assunto = new Assunto(nome, descricao, idDisciplina);
-        const {lastId} = await dao.insert(assunto);
+        const result = await dao.getNextOrdem(idDisciplina);
+        const ordem = result.nextOrdem ? result.nextOrdem : 1;
+        const assunto = new Assunto(nome, descricao, idDisciplina, ordem);
+        const { lastId } = await dao.insert(assunto);
         v.msg = "Assunto inserido com sucesso";
-        v.payload = lastId;
+        v.payload = { "id": lastId, "ordem": ordem };
     }
 
     return v;
 }
 
 async function update(req) {
-    ({id, idDisciplina, nome, descricao } = req.body);
+    ({ id, idDisciplina, nome, descricao, ordem } = req.body);
 
-    v = validate([id, nome, descricao]);
+    v = validate([id, nome, descricao, ordem]);
 
     if (v.status == Validation.STATUS_OK) {
-        const assunto = new Assunto(nome, descricao, idDisciplina, id);
-        const {lastId} = await dao.update(assunto);
+        const assunto = new Assunto(nome, descricao, idDisciplina, ordem, id);
+        const { lastId } = await dao.update(assunto);
         v.msg = "Assunto atualizado com sucesso";
-    }    
+    }
     return v;
 }
 
+async function reorder(req) {
+    ({ novaOrdemAssuntos } = req.body);
+    dao.reorder(novaOrdemAssuntos);
+    return new Validation(Validation.STATUS_OK);
+}
+
 async function getById(req) {
-    ({id} = req.params);
+    ({ id } = req.params);
     const assunto = await dao.getById(id);
     return assunto;
 }
 
 async function getAll(req) {
-    const assuntos = await dao.getAll();
+    ({ idDisciplina } = req.params);
+    const assuntos = await dao.getAll(idDisciplina);
     return assuntos;
 }
 
 async function del(req) {
-    ({id} = req.body);
+    ({ id } = req.body);
     await dao.delete(id);
     v = new Validation(Validation.STATUS_OK, "Registro excluído com sucesso");
     return v;
 }
 
-module.exports = { create, update, getById, getAll, del}
+module.exports = { create, update, getById, getAll, del, reorder }
