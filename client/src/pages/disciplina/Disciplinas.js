@@ -1,28 +1,35 @@
 import { useState, useEffect, useRef } from 'react';
 import { Toast } from 'primereact/toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column'
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import axios from 'axios';
 import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 import { showSuccess } from '../../util/Globals';
 import { stripHtml } from "string-strip-html";
+import { getSecure, postSecure } from '../../util/SecureRequest';
+
 
 function Disciplinas() {
     const [disciplinas, setDisciplinas] = useState([]);
+    const navigate = useNavigate();
     const toast = useRef(null);
 
     const getDisciplinas = async function () {
-        const response = await axios('/api/disciplina/list');
-        setDisciplinas(response.data);
+        try {
+            const response = await getSecure('/api/disciplina/list');
+            setDisciplinas(response.data);
+        } catch (error) {
+            navigate('/not-authorized');
+        }
     }
 
     useEffect(() => {
         getDisciplinas();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const confirm = (id) => {
@@ -31,7 +38,7 @@ function Disciplinas() {
             header: 'Confirmação',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                axios.post("/api/disciplina/delete", { id });
+                postSecure("/api/disciplina/delete", { id });
                 const filtered = disciplinas.filter((disciplina) => disciplina.id !== id);
                 setDisciplinas(filtered);
 

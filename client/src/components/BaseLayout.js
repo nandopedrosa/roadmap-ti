@@ -3,10 +3,10 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 
 
-function BaseLayout() {
+function BaseLayout({ usuario, setUsuario }) {
     return (
         <>
-            <Nav />
+            <Nav usuario={usuario} setUsuario={setUsuario} />
             <Outlet />
             <Footer />
         </>

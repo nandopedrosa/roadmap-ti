@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const service = require('./service.js');
 
-
 router.route('/create').post((req, res) => {
     service.create(req).then((v) => {
         res.send(v);
@@ -33,6 +32,5 @@ router.route('/delete').post((req, res) => {
         res.send(v);
     });
 });
-
 
 module.exports = router;

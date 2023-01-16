@@ -1,4 +1,5 @@
 require('express-async-errors');
+require('dotenv').config();
 
 const express = require('express');
 const app = express();
@@ -23,14 +24,22 @@ app.use(cors());
 const xss = require('xss-clean');
 app.use(xss());
 
-//App setup
-app.use(express.json());
+//App setup and Middlewares
+app.use(express.json())
+const errorHandlerMiddleware = require('./util/middleware/error-handler');
+const notFoundMiddleware = require('./util/middleware/not-found-handler');
+const authenticationMiddleware = require('./util/middleware/auth');
 
-//Views
+//App Views
 const viewsDisciplina = require('./disciplina/views.js');
-app.use('/api/disciplina', viewsDisciplina);
+app.use('/api/disciplina', authenticationMiddleware, viewsDisciplina);
 const viewsAssunto = require('./assunto/views.js');
-app.use('/api/assunto', viewsAssunto);
+app.use('/api/assunto', authenticationMiddleware, viewsAssunto);
+const viewsAuth = require('./auth/views.js');
+app.use('/api/auth', viewsAuth);
+
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 3001;
 
