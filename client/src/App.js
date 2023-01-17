@@ -11,6 +11,7 @@ import Signup from './pages/auth/Signup';
 import NaoAutorizado from './pages/NaoAutorizado';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Roadmap from './pages/roadmap/Roadmap';
 
 function App() {
     const [usuario, setUsuario] = useState(null);
@@ -30,8 +31,9 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<BaseLayout usuario={usuario} setUsuario={setUsuario} />}>
+                <Route path="/roadmap/:idDisciplina" element={<Roadmap />} />
 
+                <Route path="/" element={<BaseLayout usuario={usuario} setUsuario={setUsuario} />}>
                     {/* Public Routes */}
 
                     <Route index element={<Home usuario={usuario} />} />
@@ -57,6 +59,8 @@ function App() {
                             <EditarAssunto />
                         </ProtectedRoute>
                     } />
+
+
 
                     {/* Error Routes */}
 

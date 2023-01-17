@@ -33,10 +33,15 @@ const authenticationMiddleware = require('./util/middleware/auth');
 //App Views
 const viewsDisciplina = require('./disciplina/views.js');
 app.use('/api/disciplina', authenticationMiddleware, viewsDisciplina);
+
 const viewsAssunto = require('./assunto/views.js');
 app.use('/api/assunto', authenticationMiddleware, viewsAssunto);
+
 const viewsAuth = require('./auth/views.js');
 app.use('/api/auth', viewsAuth);
+
+const viewsRoadmap = require('./roadmap/views');
+app.use('/api/roadmap', viewsRoadmap);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

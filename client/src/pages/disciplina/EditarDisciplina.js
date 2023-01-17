@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import axios from 'axios';
 import Validation from '../../util/Validation';
 import { Toast } from 'primereact/toast';
 import { showSuccess, showError } from '../../util/Globals';
@@ -14,6 +13,7 @@ import "primeicons/primeicons.css";
 import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 import { stripHtml } from 'string-strip-html';
+import { getSecure, postSecure } from '../../util/SecureRequest';
 
 function EditarDisciplina() {
     const toast = useRef(null);
@@ -28,7 +28,7 @@ function EditarDisciplina() {
     // Page Load
     const getDisciplina = async function () {
         if (idParam !== "new") {
-            const responseDisciplina = await axios(`/api/disciplina/${idParam}`);
+            const responseDisciplina = await getSecure(`/api/disciplina/${idParam}`);
             if (!responseDisciplina.data.id) {
                 navigate('/not-found');
             }
@@ -37,7 +37,7 @@ function EditarDisciplina() {
             setDescricao(responseDisciplina.data.descricao);
 
             //Fetch assuntos
-            const responseAssuntos = await axios(`/api/assunto/list/${idParam}`);
+            const responseAssuntos = await getSecure(`/api/assunto/list/${idParam}`);
             setAssuntos(responseAssuntos.data);
         }
     }
@@ -53,7 +53,7 @@ function EditarDisciplina() {
         try {
             //Create
             if (idParam === 'new' && !id) {
-                const response = await axios.post('/api/disciplina/create', { nome, descricao });
+                const response = await postSecure('/api/disciplina/create', { nome, descricao });
                 if (response.data.status === Validation.STATUS_OK) {
                     showSuccess(toast, "Registro criado com sucesso");
                     setId(response.data.payload);
@@ -62,7 +62,7 @@ function EditarDisciplina() {
                 }
             } else {
                 //Update
-                const response = await axios.post('/api/disciplina/update', { id, nome, descricao });
+                const response = await postSecure('/api/disciplina/update', { id, nome, descricao });
                 if (response.data.status === Validation.STATUS_OK) {
                     showSuccess(toast, "Registro atualizado com sucesso");
                 } else {
@@ -80,7 +80,7 @@ function EditarDisciplina() {
             header: 'Confirmação',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                axios.post("/api/assunto/delete", { id });
+                postSecure("/api/assunto/delete", { id });
                 const filtered = assuntos.filter((assunto) => assunto.id !== id);
                 setAssuntos(filtered);
 
@@ -114,7 +114,7 @@ function EditarDisciplina() {
     function reorder(event) {
         const novaOrdemAssuntos = event.value;
         setAssuntos(novaOrdemAssuntos);
-        axios.post('/api/assunto/reorder', { novaOrdemAssuntos }); //id = idDisciplina
+        postSecure('/api/assunto/reorder', { novaOrdemAssuntos }); //id = idDisciplina
     }
 
     return (

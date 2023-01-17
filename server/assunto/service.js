@@ -12,14 +12,14 @@ function validate(params) {
 }
 
 async function create(req) {
-    ({ idDisciplina, nome, descricao } = req.body);
+    ({ idDisciplina, nome, descricao, referencia } = req.body);
 
-    v = validate([idDisciplina, nome, descricao]);
+    v = validate([idDisciplina, nome, descricao, referencia]);
 
     if (v.status == Validation.STATUS_OK) {
         const result = await dao.getNextOrdem(idDisciplina);
         const ordem = result.nextOrdem ? result.nextOrdem : 1;
-        const assunto = new Assunto(nome, descricao, idDisciplina, ordem);
+        const assunto = new Assunto(nome, descricao, idDisciplina, ordem, referencia);
         const { lastId } = await dao.insert(assunto);
         v.msg = "Assunto inserido com sucesso";
         v.payload = { "id": lastId, "ordem": ordem };
@@ -29,12 +29,12 @@ async function create(req) {
 }
 
 async function update(req) {
-    ({ id, idDisciplina, nome, descricao, ordem } = req.body);
+    ({ id, idDisciplina, nome, descricao, ordem, referencia } = req.body);
 
-    v = validate([id, nome, descricao, ordem]);
+    v = validate([id, nome, descricao, ordem, referencia]);
 
     if (v.status == Validation.STATUS_OK) {
-        const assunto = new Assunto(nome, descricao, idDisciplina, ordem, id);
+        const assunto = new Assunto(nome, descricao, idDisciplina, ordem, referencia, id);
         const { lastId } = await dao.update(assunto);
         v.msg = "Assunto atualizado com sucesso";
     }

@@ -18,7 +18,7 @@ async function create(req) {
 
     if (v.status == Validation.STATUS_OK) {
         const disciplina = new Disciplina(nome, descricao);
-        const {lastId} = await dao.insert(disciplina);
+        const { lastId } = await dao.insert(disciplina);
         v.msg = "Disciplina inserida com sucesso";
         v.payload = lastId;
     }
@@ -27,21 +27,21 @@ async function create(req) {
 }
 
 async function update(req) {
-    ({id, nome, descricao } = req.body);
+    ({ id, nome, descricao } = req.body);
 
     v = validate([id, nome, descricao]);
 
     if (v.status == Validation.STATUS_OK) {
         const disciplina = new Disciplina(nome, descricao, id);
-        const {lastId} = await dao.update(disciplina);
+        const { lastId } = await dao.update(disciplina);
         v.msg = "Disciplina atualizada com sucesso";
-    }    
+    }
     return v;
 }
 
 async function getById(req) {
-    ({id} = req.params);
-    const disciplina = await dao.getById(id);
+    ({ idDisciplina } = req.params);
+    const disciplina = await dao.getById(idDisciplina);
     return disciplina;
 }
 
@@ -51,10 +51,10 @@ async function getAll(req) {
 }
 
 async function del(req) {
-    ({id} = req.body);
+    ({ id } = req.body);
     await dao.delete(id);
     v = new Validation(Validation.STATUS_OK, "Registro excluído com sucesso");
     return v;
 }
 
-module.exports = { create, update, getById, getAll, del}
+module.exports = { create, update, getById, getAll, del }

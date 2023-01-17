@@ -21,7 +21,7 @@ router.route('/list').get((req, res) => {
 });
 
 
-router.route('/:id').get((req, res) => {
+router.route('/:idDisciplina').get((req, res) => {
     service.getById(req).then((result) => {
         res.send(result);
     });

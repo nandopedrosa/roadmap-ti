@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import axios from 'axios';
 import Validation from '../../util/Validation';
 import { Toast } from 'primereact/toast';
 import { showSuccess, showError } from '../../util/Globals';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import { getSecure, postSecure } from '../../util/SecureRequest';
 
 function EditarAssunto() {
     const toast = useRef(null);
@@ -19,11 +19,12 @@ function EditarAssunto() {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [ordem, setOrdem] = useState('');
+    const [referencia, setReferencia] = useState('');
 
     // Page Load
     const getAssunto = async function () {
         if (idParam !== "new") {
-            const response = await axios(`/api/assunto/${idParam}`);
+            const response = await getSecure(`/api/assunto/${idParam}`);
             if (!response.data.id) {
                 navigate('/not-found');
             }
@@ -31,6 +32,7 @@ function EditarAssunto() {
             setNome(response.data.nome);
             setDescricao(response.data.descricao);
             setOrdem(response.data.ordem);
+            setReferencia(response.data.referencia);
         }
     }
 
@@ -45,7 +47,7 @@ function EditarAssunto() {
         try {
             //Create
             if (idParam === 'new' && !id) {
-                const response = await axios.post('/api/assunto/create', { nome, descricao, idDisciplina });
+                const response = await postSecure('/api/assunto/create', { nome, descricao, idDisciplina, referencia });
                 if (response.data.status === Validation.STATUS_OK) {
                     showSuccess(toast, "Registro criado com sucesso");
                     setId(response.data.payload.id);
@@ -55,7 +57,7 @@ function EditarAssunto() {
                 }
             } else {
                 //Update
-                const response = await axios.post('/api/assunto/update', { id, nome, descricao, ordem });
+                const response = await postSecure('/api/assunto/update', { id, nome, descricao, ordem, referencia });
                 if (response.data.status === Validation.STATUS_OK) {
                     showSuccess(toast, "Registro atualizado com sucesso");
                 } else {
@@ -90,13 +92,24 @@ function EditarAssunto() {
                                         required />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="descricao" className="form-label">Descrição*</label>
+                                    <label htmlFor="descricao" className="form-label">Tópicos*</label>
                                     <CKEditor
                                         editor={ClassicEditor}
                                         data={descricao}
                                         onChange={(event, editor) => {
                                             const data = editor.getData();
                                             setDescricao(data);
+                                        }}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="referencia" className="form-label">Referências*</label>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        data={referencia}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            setReferencia(data);
                                         }}
                                     />
                                 </div>
