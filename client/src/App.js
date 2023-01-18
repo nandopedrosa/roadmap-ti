@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import BaseLayout from './components/BaseLayout';
+import Admin from './pages/Admin';
 import Home from './pages/Home';
 import Disciplinas from './pages/disciplina/Disciplinas';
 import EditarDisciplina from './pages/disciplina/EditarDisciplina';
@@ -31,17 +32,18 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route index element={<Home />} />
                 <Route path="/roadmap/:idDisciplina" element={<Roadmap />} />
+                <Route path='/not-found' element={<PaginaNaoEncontrada />} />
+                <Route path='*' element={<PaginaNaoEncontrada />} />
 
-                <Route path="/" element={<BaseLayout usuario={usuario} setUsuario={setUsuario} />}>
+                <Route path="/admin" element={<BaseLayout usuario={usuario} setUsuario={setUsuario} />}>
                     {/* Public Routes */}
-
-                    <Route index element={<Home usuario={usuario} />} />
+                    <Route index element={<Admin usuario={usuario} />} />
                     <Route path="auth/login" element={<Login setUsuario={setUsuario} />} />
                     <Route path="auth/signup" element={<Signup />} />
 
                     {/* Protected Routes */}
-
                     <Route path="disciplinas" element={
                         <ProtectedRoute usuario={usuario}>
                             <Disciplinas />
@@ -60,13 +62,9 @@ function App() {
                         </ProtectedRoute>
                     } />
 
-
-
                     {/* Error Routes */}
+                    <Route path='not-authorized' element={<NaoAutorizado />} />
 
-                    <Route path='/not-authorized' element={<NaoAutorizado />} />
-                    <Route path='/not-found' element={<PaginaNaoEncontrada />} />
-                    <Route path='*' element={<PaginaNaoEncontrada />} />
                 </Route>
             </Routes>
         </BrowserRouter>

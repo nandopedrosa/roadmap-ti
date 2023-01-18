@@ -22,7 +22,7 @@ function ProtectedRoute({ usuario, children }) {
 
 
     if (!usuario) {
-        return <Navigate to='/not-authorized' />;
+        return <Navigate to='/admin/not-authorized' />;
     }
     return children;
 

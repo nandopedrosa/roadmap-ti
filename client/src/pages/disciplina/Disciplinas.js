@@ -23,7 +23,7 @@ function Disciplinas() {
             const response = await getSecure('/api/disciplina/list');
             setDisciplinas(response.data);
         } catch (error) {
-            navigate('/not-authorized');
+            navigate('/admin/not-authorized');
         }
     }
 
@@ -79,7 +79,7 @@ function Disciplinas() {
                     </div>
                     <div className="row mb-5">
                         <div className="col-sm-12">
-                            <Link to="/disciplinas/new" role="button" className="btn btn-primary">Adicionar Disciplina</Link>
+                            <Link to="/admin/disciplinas/new" role="button" className="btn btn-primary">Adicionar Disciplina</Link>
                         </div>
                     </div>
                     <div className="row ">

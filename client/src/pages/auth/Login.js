@@ -21,7 +21,7 @@ function Login({ setUsuario }) {
             if (response.data.status === Validation.STATUS_OK) {
                 localStorage.setItem('token', response.data.payload.token);
                 setUsuario(response.data.payload.usuario);
-                navigate("/");
+                navigate("/admin");
             } else {
                 localStorage.removeItem('token');
                 showError(toast, response.data.msg);

@@ -151,7 +151,7 @@ function EditarDisciplina() {
                                     />
                                 </div>
                                 <button type="submit" className="btn btn-primary me-3">Salvar</button>
-                                <Link className="btn btn-light" to="/disciplinas" role="button">Voltar</Link>
+                                <Link className="btn btn-light" to="/admin/disciplinas" role="button">Voltar</Link>
                             </form>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ function EditarDisciplina() {
                                 <br />
                                 <div className="row mb-4">
                                     <div className="col-sm-12">
-                                        <Link to={`/assuntos/${id}/new`} role="button" className="btn btn-success ">Adicionar assunto</Link>
+                                        <Link to={`/admin/assuntos/${id}/new`} role="button" className="btn btn-success ">Adicionar assunto</Link>
                                     </div>
                                 </div>
                                 <div className="row ">

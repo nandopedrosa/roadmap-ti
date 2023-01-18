@@ -22,11 +22,11 @@ function Nav({ usuario, setUsuario }) {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Home</Link>
+                            <Link className="nav-link" to="/admin">Home</Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link" to="/disciplinas">Disciplinas e Assuntos</Link>
+                            <Link className="nav-link" to="/admin/disciplinas">Disciplinas e Assuntos</Link>
                         </li>
 
                         {usuario ?
@@ -36,10 +36,10 @@ function Nav({ usuario, setUsuario }) {
                             :
                             <>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/auth/login">Login</Link>
+                                    <Link className="nav-link" to="/admin/auth/login">Login</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/auth/signup">Criar conta</Link>
+                                    <Link className="nav-link" to="/admin/auth/signup">Criar conta</Link>
                                 </li>
                             </>
                         }

@@ -57,7 +57,7 @@ function Signup() {
                         <div className="col-sm-12">
                             {
                                 contaCriada ?
-                                    <Link className="btn btn-secondary" to="/auth/login" role="button">Fazer Login</Link>
+                                    <Link className="btn btn-secondary" to="/admin/auth/login" role="button">Fazer Login</Link>
                                     :
                                     <form onSubmit={handleSubmit}>
                                         <div className="mb-3">

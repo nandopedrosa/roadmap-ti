@@ -114,7 +114,7 @@ function EditarAssunto() {
                                     />
                                 </div>
                                 <button type="submit" className="btn btn-primary me-3">Salvar</button>
-                                <Link className="btn btn-light" to={`/disciplinas/${idDisciplina}`} role="button">Voltar</Link>
+                                <Link className="btn btn-light" to={`/admin/disciplinas/${idDisciplina}`} role="button">Voltar</Link>
                             </form>
                         </div>
                     </div>
