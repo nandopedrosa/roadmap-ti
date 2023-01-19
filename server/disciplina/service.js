@@ -57,4 +57,10 @@ async function del(req) {
     return v;
 }
 
-module.exports = { create, update, getById, getAll, del }
+
+async function getCountAssuntos() {
+    const disciplinaCountAssuntos = await dao.getCountAssuntos();
+    return disciplinaCountAssuntos;
+}
+
+module.exports = { create, update, getById, getAll, del, getCountAssuntos }

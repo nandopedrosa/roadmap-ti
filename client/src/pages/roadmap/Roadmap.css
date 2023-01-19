@@ -1,7 +1,6 @@
 .roadmap {
     box-sizing: border-box;
     background-color: #f5f5f5;
-    font-family: Helvetica, sans-serif;
 }
 
 
@@ -150,7 +149,10 @@
 
 }
 
+
+
 .roadmap-wrapper {
     margin-right: 30px;
     margin-left: 30px;
+    font-family: Helvetica, sans-serif;
 }

@@ -43,6 +43,9 @@ app.use('/api/auth', viewsAuth);
 const viewsRoadmap = require('./roadmap/views');
 app.use('/api/roadmap', viewsRoadmap);
 
+const viewsHome = require('./home/views');
+app.use('/api/home', viewsHome);
+
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 

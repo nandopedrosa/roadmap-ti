@@ -1,8 +1,10 @@
 import './Roadmap.css';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Footer from "../../components/Footer";
+import PublicNav from '../../components/PublicNav';
+import RoadmapHeader from './RoadmapHeader';
 
 function Roadmap() {
     const { idDisciplina } = useParams();
@@ -21,11 +23,10 @@ function Roadmap() {
 
     return (
         <>
+            <PublicNav />
+
             <div className="roadmap">
-                <div className="roadmap-text-content">
-                    <h1 style={{ textAlign: "center" }}>{roadmap.disciplina.nome}</h1>
-                    <div dangerouslySetInnerHTML={{ __html: roadmap.disciplina.descricao }}></div>
-                </div>
+                <RoadmapHeader nome={roadmap.disciplina.nome} descricao={roadmap.disciplina.descricao} />
                 <div className="roadmap-wrapper">
                     <div className="roadmap-timeline">
                         {
