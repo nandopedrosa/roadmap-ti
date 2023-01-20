@@ -56,7 +56,7 @@ function Disciplinas() {
     const actionsColumnTemplate = (rowData) => {
         return <>
             <button type="button" title="Deletar" onClick={() => { confirm(rowData.id) }} className="btn btn-sm btn-danger me-2 mt-1"><i className="bi bi-trash"></i></button>
-            <ConfirmDialog />
+
             <Link className="btn btn-primary btn-sm mt-1 " to={`./${rowData.id}`} role="button"><i className="bi bi-pencil"></i></Link>
         </>;
     }
@@ -69,6 +69,7 @@ function Disciplinas() {
     return (
         <>
             <Toast ref={toast} />
+            <ConfirmDialog />
             <div className="container">
                 <div className="p-3 m-3">
                     <div className="row mb-2">
