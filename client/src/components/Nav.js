@@ -13,7 +13,7 @@ function Nav({ usuario, setUsuario }) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="offset-md-1 container px-3">
-                <Link className="navbar-brand" to="/"><strong>Roadmap de TI</strong></Link>
+                <Link className="navbar-brand" to="/admin"><strong>Roadmap de TI</strong></Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">

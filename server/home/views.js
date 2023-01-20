@@ -5,7 +5,7 @@ const serviceAssunto = require('../assunto/service.js');
 
 router.route('/cards').get((req, res) => {
     let cards = [];
-    serviceDisciplina.getCountAssuntos().then((cards) => {
+    serviceDisciplina.getCardsDisciplinas().then((cards) => {
         res.send(cards);
     });
 });

@@ -35,7 +35,7 @@ function Roadmap() {
                                     <div className="roadmap-content">
                                         <h3>{assunto.nome}</h3>
                                         <p>
-                                            <b>Principais tópicos:</b>
+                                            <b>O que devo estudar?</b>
                                             <div dangerouslySetInnerHTML={{ __html: assunto.descricao }}></div>
                                         </p>
                                     </div>

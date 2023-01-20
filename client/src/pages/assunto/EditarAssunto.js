@@ -92,7 +92,7 @@ function EditarAssunto() {
                                         required />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="descricao" className="form-label">Tópicos*</label>
+                                    <label htmlFor="descricao" className="form-label">O que devo estudar?*</label>
                                     <CKEditor
                                         editor={ClassicEditor}
                                         data={descricao}

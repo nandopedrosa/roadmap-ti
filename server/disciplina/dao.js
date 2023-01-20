@@ -30,11 +30,11 @@ class DisciplinaDAO {
     }
 
     getAll() {
-        return this.db.all(`SELECT * FROM disciplina`);
+        return this.db.all(`SELECT * FROM disciplina order by nome`);
     }
 
     // Retorna o numero de assuntos agrupados por disciplina
-    getCountAssuntos() {
+    getCardsDisciplinas() {
         return this.db.all(`SELECT disciplina.id as id, disciplina.nome as nome, disciplina.descricao as descricao, COUNT(*) as qtd FROM disciplina, assunto where disciplina.id = assunto.id_disciplina  GROUP BY disciplina.nome ORDER BY disciplina.nome`)
     }
 

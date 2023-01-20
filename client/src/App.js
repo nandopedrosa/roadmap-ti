@@ -25,7 +25,9 @@ function App() {
                 setUsuario(response.data.usuario);
             }
         }
-        fetchUser();
+        if (window.location.href.indexOf("/admin") !== -1) {
+            fetchUser();
+        }
     }, []);
 
 

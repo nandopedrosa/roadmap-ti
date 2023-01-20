@@ -14,7 +14,7 @@ function Admin({ usuario }) {
                         <p>Faça o login ou crie uma nova conta para usar o aplicativo.</p>
 
                 }
-                <Link className="btn btn-success btn-lg mb-3 me-3" to="/disciplinas" role="button">Gerenciar Disciplinas e Assuntos</Link>
+                <Link className="btn btn-success btn-lg mb-3 me-3" to="/admin/disciplinas" role="button">Gerenciar Disciplinas e Assuntos</Link>
             </div>
         </div>
     );

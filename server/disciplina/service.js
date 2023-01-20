@@ -58,9 +58,9 @@ async function del(req) {
 }
 
 
-async function getCountAssuntos() {
-    const disciplinaCountAssuntos = await dao.getCountAssuntos();
+async function getCardsDisciplinas() {
+    const disciplinaCountAssuntos = await dao.getCardsDisciplinas();
     return disciplinaCountAssuntos;
 }
 
-module.exports = { create, update, getById, getAll, del, getCountAssuntos }
+module.exports = { create, update, getById, getAll, del, getCardsDisciplinas }
