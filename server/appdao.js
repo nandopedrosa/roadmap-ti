@@ -9,7 +9,7 @@ require('dotenv').config();
 
 class AppDAO {
     constructor() {
-        const databaseFile = process.env.DATABASE === 'local' ? 'data-local.db' : 'data.db';
+        const databaseFile = process.env.DATABASE === 'local' ? 'data-local.db' : './data/data-remote.db';
 
         this.db = new sqlite3.Database(databaseFile, (err) => {
             if (err) {
