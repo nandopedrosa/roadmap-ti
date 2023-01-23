@@ -105,7 +105,7 @@ function EditarDisciplina() {
                 <div className="assunto-list-action">
                     <button type="button" title="Deletar" onClick={() => { confirm(assunto.id) }} className="btn btn-sm btn-danger  mt-1"><i className="bi bi-trash"></i></button>
 
-                    <Link className="btn btn-primary btn-sm mt-1 " to={`/assuntos/${id}/${assunto.id}`} role="button"><i className="bi bi-pencil"></i></Link>
+                    <Link className="btn btn-primary btn-sm mt-1 " to={`/admin/assuntos/${id}/${assunto.id}`} role="button"><i className="bi bi-pencil"></i></Link>
                 </div>
             </div>
         );
