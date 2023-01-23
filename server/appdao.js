@@ -9,6 +9,8 @@ require('dotenv').config();
 
 class AppDAO {
     constructor() {
+        // Render Disk directory is NOT from the root of the project, but from the root of the server
+        // DO NOT put "./data" , instead use "/data"
         const databaseFile = process.env.DATABASE === 'local' ? 'data-local.db' : '/data/data-remote.db';
 
         this.db = new sqlite3.Database(databaseFile, (err) => {
