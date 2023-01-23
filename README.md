@@ -1,2 +1,5 @@
 # Roadmap de TI
-Ferramenta para gerar um roadmap de estudos para concurseiros de tecnologia da informação em concursos públicos.
+Tool to generate a roadmap of studies for information technology candidates in public tenders.
+
+Frontend: React JS
+Backend: Node with Express
