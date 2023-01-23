@@ -49,11 +49,11 @@ function Roadmap() {
                                                 <h3>{assunto.nome}</h3>
                                                 <p>
                                                     <b>O que devo estudar?</b>
-                                                    <div style={{ textAlign: "justify" }} dangerouslySetInnerHTML={{ __html: assunto.descricao }}></div>
+                                                    <div dangerouslySetInnerHTML={{ __html: assunto.descricao }}></div>
                                                 </p>
                                                 <p>
                                                     <b>Referências</b>
-                                                    <div style={{ textAlign: "justify" }} dangerouslySetInnerHTML={{ __html: assunto.referencia }}></div>
+                                                    <div dangerouslySetInnerHTML={{ __html: assunto.referencia }}></div>
                                                 </p>
                                             </div>
                                         </div>
