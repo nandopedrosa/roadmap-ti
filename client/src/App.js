@@ -11,8 +11,8 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import NaoAutorizado from './pages/NaoAutorizado';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Roadmap from './pages/roadmap/Roadmap';
+import axios from 'axios';
 
 function App() {
     const [usuario, setUsuario] = useState(null);

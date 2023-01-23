@@ -49,7 +49,7 @@ app.use('/api/home', viewsHome);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 10000;
 
 const start = async () => {
     try {
