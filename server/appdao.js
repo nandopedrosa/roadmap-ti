@@ -13,7 +13,7 @@ class AppDAO {
 
         this.db = new sqlite3.Database(databaseFile, (err) => {
             if (err) {
-                console.log('Could not connect to database', err)
+                console.log('Could not connect to database file: ' + databaseFile, err)
                 return;
             }
         });
