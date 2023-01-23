@@ -1,5 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const Promise = require('bluebird')
+require('dotenv').config();
 
 /*
  We're going to quickly write a wrapper function that gives us a promised version of the sqlite3 driver.
@@ -8,7 +9,9 @@ const Promise = require('bluebird')
 
 class AppDAO {
     constructor() {
-        this.db = new sqlite3.Database('data.db', (err) => {
+        const databaseFile = process.env.DATABASE === 'local' ? 'data-local.db' : 'data.db';
+
+        this.db = new sqlite3.Database(databaseFile, (err) => {
             if (err) {
                 console.log('Could not connect to database', err)
             }
