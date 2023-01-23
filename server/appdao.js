@@ -14,8 +14,35 @@ class AppDAO {
         this.db = new sqlite3.Database(databaseFile, (err) => {
             if (err) {
                 console.log('Could not connect to database', err)
+                return;
             }
         });
+
+        this.db.run(`CREATE TABLE IF NOT EXISTS "usuario" (
+                    "id"	INTEGER NOT NULL,
+                    "nome"	TEXT NOT NULL,
+                    "email"	INTEGER NOT NULL UNIQUE,
+                    "senha"	INTEGER NOT NULL,
+                    PRIMARY KEY("id" AUTOINCREMENT)
+                )`);
+
+        this.db.run(`CREATE TABLE IF NOT EXISTS "disciplina" (
+                    "id"	INTEGER NOT NULL,
+                    "nome"	TEXT NOT NULL,
+                    "descricao"	TEXT NOT NULL,
+                    PRIMARY KEY("id" AUTOINCREMENT)
+                )`);
+
+        this.db.run(`CREATE TABLE IF NOT EXISTS "assunto"  (
+                    "id"	INTEGER NOT NULL,
+                    "id_disciplina"	INTEGER NOT NULL,
+                    "nome"	TEXT NOT NULL,
+                    "descricao"	TEXT NOT NULL,
+                    "ordem"	INTEGER NOT NULL,
+                    "referencia"	TEXT NOT NULL,
+                    FOREIGN KEY("id_disciplina") REFERENCES "disciplina"("id") ON DELETE CASCADE,
+                    PRIMARY KEY("id" AUTOINCREMENT)
+                )`);
     }
 
 
