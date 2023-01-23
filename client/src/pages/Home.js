@@ -7,14 +7,20 @@ import PublicNav from "../components/PublicNav";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Spinner from '../components/Spinner';
 
 function Home() {
-
     const [cards, setCards] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    const getCards = async function () {
-        const response = await axios(`/api/home/cards`);
-        setCards(response.data);
+    const getCards = function () {
+        setLoading(true);
+
+        axios(`/api/home/cards`).then((response) => {
+            setCards(response.data);
+        }).finally(() => {
+            setLoading(false);
+        });
     }
 
     useEffect(() => {
@@ -50,30 +56,33 @@ function Home() {
                 </div>
                 <div className="album py-5 bg-light">
                     <div className="container">
-
-
-                        <div className="row row-cols-3 row-cols-md-3 g-4">
-                            {
-                                cards.map((card) =>
-                                    <div key={card.id} className="col">
-                                        <div className="card h-100">
-                                            <div className="card-body">
-                                                <Link to={`/roadmap/${card.id}`} style={{ textDecoration: "inherit", color: "inherit" }}>
-                                                    <h5 className="card-title">{card.nome}</h5>
-                                                    <div className="card-text text-muted"
-                                                        style={{ textAlign: "justify" }}
-                                                        dangerouslySetInnerHTML={{ __html: truncateDescricao(card.descricao) }}>
+                        {
+                            loading ?
+                                <Spinner />
+                                :
+                                <div className="row row-cols-3 row-cols-md-3 g-4">
+                                    {
+                                        cards.map((card) =>
+                                            <div key={card.id} className="col">
+                                                <div className="card h-100">
+                                                    <div className="card-body">
+                                                        <Link to={`/roadmap/${card.id}`} style={{ textDecoration: "inherit", color: "inherit" }}>
+                                                            <h5 className="card-title">{card.nome}</h5>
+                                                            <div className="card-text text-muted"
+                                                                style={{ textAlign: "justify" }}
+                                                                dangerouslySetInnerHTML={{ __html: truncateDescricao(card.descricao) }}>
+                                                            </div>
+                                                        </Link>
                                                     </div>
-                                                </Link>
+                                                    <div className="card-footer" >
+                                                        <small >{card.qtd === 0 || card.qtd > 1 ? `${card.qtd} assuntos` : `${card.qtd} assunto`}</small>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="card-footer" >
-                                                <small >{card.qtd === 0 || card.qtd > 1 ? `${card.qtd} assuntos` : `${card.qtd} assunto`}</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                        </div>
+                                        )
+                                    }
+                                </div>
+                        }
                     </div>
                 </div>
             </main>
