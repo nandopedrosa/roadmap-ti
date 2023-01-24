@@ -13,7 +13,7 @@ function RoadmapHeader({ nome, descricao }) {
                         <div dangerouslySetInnerHTML={{ __html: descricao }}></div>
                     </p>
                 </h1>
-                <p className="fst-italic"><i className="bi bi-exclamation-circle"></i> Este roteiro não contém todos os assuntos possíveis da disciplina (foco no essencial).</p>
+                <p className="fst-italic text-center"><i className="bi bi-exclamation-circle"></i> Este roteiro não contém todos os assuntos possíveis da disciplina (foco no essencial).</p>
             </div>
         </div>
     );
