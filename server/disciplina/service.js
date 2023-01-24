@@ -12,12 +12,12 @@ function validate(params) {
 }
 
 async function create(req) {
-    ({ nome, descricao } = req.body);
+    ({ nome, descricao, autor, mostrar } = req.body);
 
-    v = validate([nome, descricao]);
+    v = validate([nome, descricao, autor, mostrar]);
 
     if (v.status == Validation.STATUS_OK) {
-        const disciplina = new Disciplina(nome, descricao);
+        const disciplina = new Disciplina(nome, descricao, autor, mostrar);
         const { lastId } = await dao.insert(disciplina);
         v.msg = "Disciplina inserida com sucesso";
         v.payload = lastId;
@@ -27,12 +27,12 @@ async function create(req) {
 }
 
 async function update(req) {
-    ({ id, nome, descricao } = req.body);
+    ({ id, nome, descricao, autor, mostrar } = req.body);
 
-    v = validate([id, nome, descricao]);
+    v = validate([id, nome, descricao, autor, mostrar]);
 
     if (v.status == Validation.STATUS_OK) {
-        const disciplina = new Disciplina(nome, descricao, id);
+        const disciplina = new Disciplina(nome, descricao, autor, mostrar, id);
         const { lastId } = await dao.update(disciplina);
         v.msg = "Disciplina atualizada com sucesso";
     }

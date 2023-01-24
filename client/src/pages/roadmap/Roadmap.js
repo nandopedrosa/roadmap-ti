@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner';
 
 function Roadmap() {
     const { idDisciplina } = useParams();
-    const [roadmap, setRoadmap] = useState({ disciplina: { nome: '', descricao: '' }, assuntos: [] });
+    const [roadmap, setRoadmap] = useState({ disciplina: { nome: '', descricao: '', autor: '' }, assuntos: [] });
     const [loading, setLoading] = useState(false);
 
     const getRoadmap = function () {
@@ -32,7 +32,7 @@ function Roadmap() {
         <>
             <PublicNav />
             <div className="roadmap">
-                <RoadmapHeader nome={roadmap.disciplina.nome} descricao={roadmap.disciplina.descricao} />
+                <RoadmapHeader nome={roadmap.disciplina.nome} descricao={roadmap.disciplina.descricao} autor={roadmap.disciplina.autor} />
                 <div className="roadmap-wrapper">
                     {
                         loading ?

@@ -1,7 +1,9 @@
 class Disciplina {
-    constructor(nome, descricao, id = null) {
+    constructor(nome, descricao, autor, mostrar, id = null) {
         this.nome = nome;
         this.descricao = descricao;
+        this.autor = autor;
+        this.mostrar = mostrar;
         this.id = id;
     }
 }

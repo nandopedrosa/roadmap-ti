@@ -24,7 +24,7 @@ class AppDAO {
                     "id"	INTEGER NOT NULL,
                     "nome"	TEXT NOT NULL,
                     "email"	INTEGER NOT NULL UNIQUE,
-                    "senha"	INTEGER NOT NULL,
+                    "senha"	INTEGER NOT NULL,            
                     PRIMARY KEY("id" AUTOINCREMENT)
                 )`);
 
@@ -32,6 +32,8 @@ class AppDAO {
                     "id"	INTEGER NOT NULL,
                     "nome"	TEXT NOT NULL,
                     "descricao"	TEXT NOT NULL,
+                    "autor" TEXT NOT NULL DEFAULT '', 
+                    "status" TEXT NOT NULL DEFAULT 'inativo',
                     PRIMARY KEY("id" AUTOINCREMENT)
                 )`);
 

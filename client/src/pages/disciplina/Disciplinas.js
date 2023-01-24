@@ -88,6 +88,7 @@ function Disciplinas() {
                             <DataTable value={disciplinas}>
                                 <Column field="nome" header="Nome"></Column>
                                 <Column body={descricaoColumnTemplate} header="Descrição"></Column>
+                                <Column style={{ textTransform: "capitalize" }} field="mostrar" header="Status"></Column>
                                 <Column header="Ações" body={actionsColumnTemplate}></Column>
                             </DataTable>
                         </div>

@@ -23,6 +23,8 @@ function EditarDisciplina() {
     const [id, setId] = useState('');
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
+    const [autor, setAutor] = useState('');
+    const [mostrar, setMostrar] = useState('');
     const [assuntos, setAssuntos] = useState([]);
 
     // Page Load
@@ -35,6 +37,8 @@ function EditarDisciplina() {
             setId(idParam);
             setNome(responseDisciplina.data.nome);
             setDescricao(responseDisciplina.data.descricao);
+            setAutor(responseDisciplina.data.autor);
+            setMostrar(responseDisciplina.data.mostrar);
 
             //Fetch assuntos
             const responseAssuntos = await getSecure(`/api/assunto/list/${idParam}`);
@@ -53,7 +57,7 @@ function EditarDisciplina() {
         try {
             //Create
             if (idParam === 'new' && !id) {
-                const response = await postSecure('/api/disciplina/create', { nome, descricao });
+                const response = await postSecure('/api/disciplina/create', { nome, descricao, autor, mostrar });
                 if (response.data.status === Validation.STATUS_OK) {
                     showSuccess(toast, "Registro criado com sucesso");
                     setId(response.data.payload);
@@ -62,7 +66,7 @@ function EditarDisciplina() {
                 }
             } else {
                 //Update
-                const response = await postSecure('/api/disciplina/update', { id, nome, descricao });
+                const response = await postSecure('/api/disciplina/update', { id, nome, descricao, autor, mostrar });
                 if (response.data.status === Validation.STATUS_OK) {
                     showSuccess(toast, "Registro atualizado com sucesso");
                 } else {
@@ -133,6 +137,24 @@ function EditarDisciplina() {
                         <div className="col-sm-12">
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value={mostrar} id="mostrar"
+                                            checked={mostrar === 'ativo' ? 'checked' : ''}
+                                            onChange={(e) => {
+                                                if (mostrar === 'ativo') {
+                                                    setMostrar('inativo');
+                                                } else {
+                                                    setMostrar('ativo');
+                                                }
+                                            }}
+                                        />
+                                        <label className="form-check-label" for="mostrar">
+                                            Mostrar na Home
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div className="mb-3">
                                     <label htmlFor="nome" className="form-label">Nome*</label>
                                     <input placeholder="Digite o nome da disciplina" name="nome"
                                         type="text" minLength="3" maxLength="128" className="form-control"
@@ -148,6 +170,17 @@ function EditarDisciplina() {
                                         onChange={(event, editor) => {
                                             const data = editor.getData();
                                             setDescricao(data);
+                                        }}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="autor" className="form-label">Autor*</label>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        data={autor}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            setAutor(data);
                                         }}
                                     />
                                 </div>
